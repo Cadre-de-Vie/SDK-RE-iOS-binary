@@ -1,0 +1,4 @@
+framework module CDVSDK {
+    umbrella header "CDV_SDK_iOS.h"
+    export *
+}
