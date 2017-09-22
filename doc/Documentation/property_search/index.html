@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Recherche de properties - CDV SDK iOS</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Recherche de properties";
+    var mkdocs_page_input_path = "property_search.md";
+    var mkdocs_page_url = "/property_search/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> CDV SDK iOS</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../concepts/">Concepts</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../login/">Login</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Recherche de properties</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#criteres-de-recherche">Critères de recherche</a></li>
+    
+
+    <li class="toctree-l2"><a href="#recherche-pour-obtenir-une-liste">Recherche pour obtenir une liste</a></li>
+    
+
+    <li class="toctree-l2"><a href="#recherche-pour-obtenir-des-cluster-a-fin-daffichage-sur-une-carte">Recherche pour obtenir des cluster à fin d'affichage sur une carte</a></li>
+    
+
+    <li class="toctree-l2"><a href="#recherche-du-nombre-de-properties">Recherche du nombre de properties</a></li>
+    
+
+    <li class="toctree-l2"><a href="#recherche-des-proprietes-par-id">Recherche des propriétés par ID</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../alerts/">Alertes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../favorites/">Favoris</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../poi/">POIs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">CDV SDK iOS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Recherche de properties</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>L'API permet de rechercher les properties correspondant à des critères géographiques, ou des critères de la property (surface, nombre de pièces...)</p>
+<h1 id="criteres-de-recherche">Critères de recherche</h1>
+<p>Pour effectuer une recheche il faut créer un objet de type CDVPropertySearch et lui définir les attributs à rechercher. Les détails des properties sont décrites dans CDVPropertySearch.h</p>
+<p>Il est possible de limiter une recheche sur des critères géographiques en utilisant des polygones, une distance (en kilomètres) autour d'un point, ou une bounding box</p>
+<pre><code class="swift"> let propertiesSearch = CDVPropertySearch.init()
+
+ propertiesSearch.cdvPageSize = 1
+         propertiesSearch.cdvService = CDVPropertyService.buy
+         propertiesSearch.cdvParentTypes = [&quot;house&quot;, &quot;apartment&quot;]
+         propertiesSearch.cdvNbRooms = [2,3]
+         propertiesSearch.cdvMinPrice = 600000
+         propertiesSearch.cdvMaxPrice = 99000
+
+         propertiesSearch.cdvGeoDistances = [CDVGeoDistance(dictionary: [&quot;lat&quot;: 48.8834611,
+                                                                         &quot;lng&quot;: 2.2652248,
+                                                                         &quot;distance&quot;: 2])]
+         propertiesSearch.cdvGeoPolygons = [CDVGeoPolygon(array: [
+             [
+                 &quot;lat&quot;: 45.755225,
+                 &quot;lng&quot;: 4.841869
+             ],
+             [
+                 &quot;lat&quot;: 45.751333,
+                 &quot;lng&quot;: 4.854121
+             ],
+             [
+                 &quot;lat&quot;: 45.762097,
+                 &quot;lng&quot;: 4.858005
+             ],
+             [
+                 &quot;lat&quot;: 45.759567,
+                 &quot;lng&quot;: 4.847148
+             ],
+             [
+                 &quot;lat&quot;: 45.755225,
+                 &quot;lng&quot;: 4.841869
+             ]
+             ])];
+
+         propertiesSearch.cdvGeoBoundingBox = CDVGeoBoundingBox(array:
+             [
+                 [
+                     &quot;lng&quot;: -7.237292528124954,
+                     &quot;lat&quot;: 52.36947753602144
+                 ],
+                 [
+                     &quot;lng&quot;: 11.637219190625046,
+                     &quot;lat&quot;: 40.036761141167766
+                 ]
+             ]);
+
+</code></pre>
+
+<h1 id="recherche-pour-obtenir-une-liste">Recherche pour obtenir une liste</h1>
+<p>Une fois l'objet CDVPropertySearch créé il est possible de recherche les properties correspondantes</p>
+<pre><code class="swift">
+ CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in
+if (error != nil) {
+    NSLog(&quot;getPropertiesWithSearch Error: \(error!.localizedDescription)&quot;)
+} else {
+    NSLog(&quot;\(totalProperties) properties found with this search but \(properties!.count) received \(String(describing: properties))&quot;)
+    for details in properties!
+    {
+        NSLog(&quot;Property details\(String(describing: details))&quot;)
+    }
+}}
+</code></pre>
+
+<p>Pour obtenir les résultats suivants (c-a-d la page suivante) il faut incrémenter la property <code>cdvPage</code> de l'objet <code>CDVPropertySearch</code>  La première page a l'index <code>1</code>, la seconde page a l'index <code>2</code>, etc-etc...</p>
+<pre><code class="swift">
+     propertiesSearch.cdvPage = 2
+ CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in
+if (error != nil) {
+    NSLog(&quot;getPropertiesWithSearch Error: \(error!.localizedDescription)&quot;)
+} else {
+    NSLog(&quot;\(totalProperties) properties found with this search but \(properties!.count) received \(String(describing: properties))&quot;)
+    for details in properties!
+    {
+        NSLog(&quot;Property details\(String(describing: details))&quot;)
+    }
+}}
+</code></pre>
+
+<h1 id="recherche-pour-obtenir-des-cluster-a-fin-daffichage-sur-une-carte">Recherche pour obtenir des cluster à fin d'affichage sur une carte</h1>
+<pre><code class="swift">CDVManager.sharedInstance().mapProperties(with: propertiesSearch) { (error, clusters, totalProperties) in
+            if (error != nil) {
+                NSLog(&quot;mapPropertiesWithSearch Error: \(error!.localizedDescription)&quot;)
+            } else {
+                NSLog(&quot;\(totalProperties) properties found with this search and \(clusters!.count) received&quot;)
+            }
+        }
+</code></pre>
+
+<h1 id="recherche-du-nombre-de-properties">Recherche du nombre de properties</h1>
+<p>Cette recherche permet d'obtenir uniquement le nombre de properties correspondant à une recherche, et non détails sur les properties</p>
+<pre><code class="swift">CDVManager.sharedInstance().countProperties(with: propertiesSearch) { (error, totalProperties) in
+            if (error != nil) {
+                NSLog(&quot;countPropertiesWithSearch Error: \(error!.localizedDescription)&quot;)
+            } else {
+                NSLog(&quot;\(totalProperties) properties found with this search&quot;)
+            }
+        }
+</code></pre>
+
+<h1 id="recherche-des-proprietes-par-id">Recherche des propriétés par ID</h1>
+<pre><code class="swift"> CDVManager.sharedInstance().getPropertiesWithIds([42], completion: { (error, propertiesSearchedById) in
+            if (error != nil) {
+                NSLog(&quot;getPropertiesWithIds Error: \(error!.localizedDescription)&quot;)
+            } else {
+                NSLog(&quot;\(propertiesSearchedById!.count) properties retrieved with ids: \(String(describing: propertiesSearchedById))&quot;)
+
+            }
+        });
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../alerts/" class="btn btn-neutral float-right" title="Alertes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../login/" class="btn btn-neutral" title="Login"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../login/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../alerts/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+      <script src="../js/syntax_language_name.js"></script>
+
+</body>
+</html>

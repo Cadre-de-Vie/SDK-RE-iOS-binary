@@ -1,0 +1,4 @@
+framework module CadreDeVieSDK {
+    umbrella header "CadreDeVieSDK.h"
+    export *
+}
