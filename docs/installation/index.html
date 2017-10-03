@@ -136,13 +136,14 @@
 <li>Glisser-déposer le fichier <code>CadreDeVieSDK.framework</code> dans votre projet Xcode</li>
 <li>Sélectionner la target de votre application et l'onglet "General"</li>
 <li>Depuis le Project Navigator de Xcode glisser  <code>CadreDeVieSDK.framework</code> sur la section <code>Linked Frameworks and Libraries</code></li>
+<li>Attention: ne <em>pas</em> rajouter le SDK dans la section <code>Embedded Binaries</code></li>
 </ul>
 <h2 id="ajout-dans-le-infoplist">Ajout dans le Info.plist</h2>
 <p>Les clés suivantes doivent être rajoutées dans votre fichier Info.plist:</p>
 <ul>
 <li><code>CDVBaseUri</code><ul>
 <li>Type: <code>String</code></li>
-<li>La valeur à saisir est <code>https://api.prod.cadredevie.fr/</code></li>
+<li>La valeur à saisir est <code>https://api.prod.cadredevie.fr</code></li>
 </ul>
 </li>
 <li><code>CDVPartnerApiKey</code><ul>

@@ -12,17 +12,17 @@
         }, 
         {
             "location": "/installation/", 
-            "text": "Int\u00e9gration dans le projet\n\n\n\n\nGlisser-d\u00e9poser le fichier \nCadreDeVieSDK.framework\n dans votre projet Xcode\n\n\nS\u00e9lectionner la target de votre application et l'onglet \"General\"\n\n\nDepuis le Project Navigator de Xcode glisser  \nCadreDeVieSDK.framework\n sur la section \nLinked Frameworks and Libraries\n\n\n\n\nAjout dans le Info.plist\n\n\nLes cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:\n\n\n\n\nCDVBaseUri\n\n\nType: \nString\n\n\nLa valeur \u00e0 saisir est \nhttps://api.prod.cadredevie.fr/\n\n\n\n\n\n\nCDVPartnerApiKey\n\n\nType: \nString\n\n\nCette valeur sera founie par CadreDeVie\n\n\n\n\n\n\n\n\nImport du SDK\n\n\nPour utilser le SDK il est n\u00e9cessaire d'importer le SDK depuis toutes les classes qui vont l'utiliser.\n\n\n@import CadreDeVieSDK\n\n\n\n\n@import CadreDeVieSDK;", 
+            "text": "Int\u00e9gration dans le projet\n\n\n\n\nGlisser-d\u00e9poser le fichier \nCadreDeVieSDK.framework\n dans votre projet Xcode\n\n\nS\u00e9lectionner la target de votre application et l'onglet \"General\"\n\n\nDepuis le Project Navigator de Xcode glisser  \nCadreDeVieSDK.framework\n sur la section \nLinked Frameworks and Libraries\n\n\nAttention: ne \npas\n rajouter le SDK dans la section \nEmbedded Binaries\n\n\n\n\nAjout dans le Info.plist\n\n\nLes cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:\n\n\n\n\nCDVBaseUri\n\n\nType: \nString\n\n\nLa valeur \u00e0 saisir est \nhttps://api.prod.cadredevie.fr\n\n\n\n\n\n\nCDVPartnerApiKey\n\n\nType: \nString\n\n\nCette valeur sera founie par CadreDeVie\n\n\n\n\n\n\n\n\nImport du SDK\n\n\nPour utilser le SDK il est n\u00e9cessaire d'importer le SDK depuis toutes les classes qui vont l'utiliser.\n\n\n@import CadreDeVieSDK\n\n\n\n\n@import CadreDeVieSDK;", 
             "title": "Installation"
         }, 
         {
             "location": "/installation/#integration-dans-le-projet", 
-            "text": "Glisser-d\u00e9poser le fichier  CadreDeVieSDK.framework  dans votre projet Xcode  S\u00e9lectionner la target de votre application et l'onglet \"General\"  Depuis le Project Navigator de Xcode glisser   CadreDeVieSDK.framework  sur la section  Linked Frameworks and Libraries", 
+            "text": "Glisser-d\u00e9poser le fichier  CadreDeVieSDK.framework  dans votre projet Xcode  S\u00e9lectionner la target de votre application et l'onglet \"General\"  Depuis le Project Navigator de Xcode glisser   CadreDeVieSDK.framework  sur la section  Linked Frameworks and Libraries  Attention: ne  pas  rajouter le SDK dans la section  Embedded Binaries", 
             "title": "Int\u00e9gration dans le projet"
         }, 
         {
             "location": "/installation/#ajout-dans-le-infoplist", 
-            "text": "Les cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:   CDVBaseUri  Type:  String  La valeur \u00e0 saisir est  https://api.prod.cadredevie.fr/    CDVPartnerApiKey  Type:  String  Cette valeur sera founie par CadreDeVie", 
+            "text": "Les cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:   CDVBaseUri  Type:  String  La valeur \u00e0 saisir est  https://api.prod.cadredevie.fr    CDVPartnerApiKey  Type:  String  Cette valeur sera founie par CadreDeVie", 
             "title": "Ajout dans le Info.plist"
         }, 
         {
