@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Alertes - CDV SDK iOS</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Alertes";
+    var mkdocs_page_input_path = "alerts.md";
+    var mkdocs_page_url = "/alerts/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> CDV SDK iOS</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../concepts/">Concepts</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../login/">Login</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../property_search/">Recherche de properties</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Alertes</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#creer-une-nouvelle-alerte">Créer une nouvelle alerte</a></li>
+    
+
+    <li class="toctree-l2"><a href="#recherche-les-alertes-actives">Recherche les alertes actives</a></li>
+    
+
+    <li class="toctree-l2"><a href="#mettre-a-jour-une-alerte-existante">Mettre à jour une alerte existante</a></li>
+    
+
+    <li class="toctree-l2"><a href="#supprimer-une-alerte">Supprimer une alerte</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../favorites/">Favoris</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../poi/">POIs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">CDV SDK iOS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Alertes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Une alerte permet à l'utilisateur d'être notifié par email quand des biens correspondants à ses critères sont ajoutés.</p>
+<h1 id="creer-une-nouvelle-alerte">Créer une nouvelle alerte</h1>
+<pre><code class="swift"> let alert = CDVAlert()
+alert.cdvName = &quot;Nouvelle alerte&quot;;
+alert.cdvMinPrice = 90000;
+alert.cdvMinArea = 90;
+alert.cdvEmail = CDVManager.sharedInstance().connectedUser!.cdvEmail
+CDVManager.sharedInstance().createAlert(alert) { (error, alertCreated) in
+    if (error != nil) {
+        NSLog(&quot;Failed to create alert: \(error!.localizedDescription)&quot;)
+    } else {
+        NSLog(&quot;Alert created&quot;)
+        }
+}
+
+</code></pre>
+
+<h1 id="recherche-les-alertes-actives">Recherche les alertes actives</h1>
+<pre><code class="swift">    CDVManager.sharedInstance().getAlertsWithCompletion() { (error, alerts) in
+            if (error != nil) {
+                NSLog(&quot;getAlertsWithCompletion Error: \(error!.localizedDescription)&quot;)
+            } else {
+                NSLog(&quot;\(alerts!.count) alerts retrieved&quot;)
+            }
+        }
+</code></pre>
+
+<h1 id="mettre-a-jour-une-alerte-existante">Mettre à jour une alerte existante</h1>
+<p>Il est possible d'éditer les properties d'une alerte existante de de mettre à jour ces modifications</p>
+<pre><code class="swift"> alertCreated!.cdvName = &quot;Alerte \(alerts!.count+1)&quot;
+                        CDVManager.sharedInstance().update(alertCreated, completion: { (error) in
+                            if (error != nil) {
+                                NSLog(&quot;update Error: \(error!.localizedDescription)&quot;)
+                            } else {
+                                NSLog(&quot;Alert updated&quot;)
+                            }
+                        })
+</code></pre>
+
+<h1 id="supprimer-une-alerte">Supprimer une alerte</h1>
+<pre><code class="swift"> CDVManager.sharedInstance().delete(existingAlert) { (error) in
+            if (error != nil) {
+                NSLog(&quot;Failed to delete alert: \(error!.localizedDescription)&quot;)
+            } else {
+                NSLog(&quot;Alert deleted&quot;)
+            }
+        }
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../favorites/" class="btn btn-neutral float-right" title="Favoris">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../property_search/" class="btn btn-neutral" title="Recherche de properties"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../property_search/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../favorites/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+      <script src="../js/syntax_language_name.js"></script>
+
+</body>
+</html>

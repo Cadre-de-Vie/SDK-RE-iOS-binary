@@ -1,0 +1,164 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome Cadre De Vie SDK iOS\n\n\nThe complete API documentation is available \nHere", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-cadre-de-vie-sdk-ios", 
+            "text": "The complete API documentation is available  Here", 
+            "title": "Welcome Cadre De Vie SDK iOS"
+        }, 
+        {
+            "location": "/installation/", 
+            "text": "Int\u00e9gration dans le projet\n\n\n\n\nGlisser-d\u00e9poser le fichier \nCadreDeVieSDK.framework\n dans votre projet Xcode\n\n\nS\u00e9lectionner la target de votre application et l'onglet \"General\"\n\n\nDepuis le Project Navigator de Xcode glisser  \nCadreDeVieSDK.framework\n sur la section \nLinked Frameworks and Libraries\n\n\n\n\nAjout dans le Info.plist\n\n\nLes cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:\n\n\n\n\nCDVBaseUri\n\n\nType: \nString\n\n\nLa valeur \u00e0 saisir est \nhttps://api.prod.cadredevie.fr/\n\n\n\n\n\n\nCDVPartnerApiKey\n\n\nType: \nString\n\n\nCette valeur sera founie par CadreDeVie\n\n\n\n\n\n\n\n\nImport du SDK\n\n\nPour utilser le SDK il est n\u00e9cessaire d'importer le SDK depuis toutes les classes qui vont l'utiliser.\n\n\n@import CadreDeVieSDK\n\n\n\n\n@import CadreDeVieSDK;", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/installation/#integration-dans-le-projet", 
+            "text": "Glisser-d\u00e9poser le fichier  CadreDeVieSDK.framework  dans votre projet Xcode  S\u00e9lectionner la target de votre application et l'onglet \"General\"  Depuis le Project Navigator de Xcode glisser   CadreDeVieSDK.framework  sur la section  Linked Frameworks and Libraries", 
+            "title": "Int\u00e9gration dans le projet"
+        }, 
+        {
+            "location": "/installation/#ajout-dans-le-infoplist", 
+            "text": "Les cl\u00e9s suivantes doivent \u00eatre rajout\u00e9es dans votre fichier Info.plist:   CDVBaseUri  Type:  String  La valeur \u00e0 saisir est  https://api.prod.cadredevie.fr/    CDVPartnerApiKey  Type:  String  Cette valeur sera founie par CadreDeVie", 
+            "title": "Ajout dans le Info.plist"
+        }, 
+        {
+            "location": "/installation/#import-du-sdk", 
+            "text": "Pour utilser le SDK il est n\u00e9cessaire d'importer le SDK depuis toutes les classes qui vont l'utiliser.  @import CadreDeVieSDK  @import CadreDeVieSDK;", 
+            "title": "Import du SDK"
+        }, 
+        {
+            "location": "/concepts/", 
+            "text": "L'API CadreDeVie permet de manipuler les entit\u00e9s suivantes:\n\n\n\n\nCDVUser\n : Un utilisateur identifi\u00e9 de l'API\n\n\nCDVContact\n : Des coordonn\u00e9es de contact\n\n\nCDVProperty\n: un lieu\n\n\nCDVAlert\n: une alerte cr\u00e9\u00e9e par un \nCDVUser\n pour \u00eatre alert\u00e9 sur une \nCDVProperty\n \n\n\nCDVPOI\n: des points d'int\u00e9r\u00eats (\u00e9coles, commerces...)", 
+            "title": "Concepts"
+        }, 
+        {
+            "location": "/login/", 
+            "text": "Certains op\u00e9ration sur l'API demandent \u00e0 l'utilisateur d'\u00eatre logg\u00e9. Ces op\u00e9rations sont:\n\n\n\n\nEditer un utilisateur\n\n\nAvoir sa propre fiche utilisateur\n\n\nG\u00e9rer les favoris\n\n\nG\u00e9rer les invisibles (c-a-d les Properties que l'utilisateur ne veux plus voir dans ses futures recherches)\n\n\nG\u00e9rer les POIs\n\n\nG\u00e9rer les projets\n\n\nG\u00e9rer les alertes\n\n\n\n\nCr\u00e9ation d'un utilisateur\n\n\nPour cr\u00e9er un nouvel utilisateur il faut initialiser une instance de CDVUser, puis appeller la m\u00e9thode createUser() du CDVManager\n\n\n\n let newUser = CDVUser(dictionary: [\n    \nemail\n: \nuser@mondomain.com\n,\n    \npassword\n: \nmonpassword\n,\n    \nfirst_name\n: \nJeanMichel\n])\n\n    CDVManager.sharedInstance().createUser(newUser) { (error, user) in\n    if (error != nil) {\n        NSLog(\nCreation failed Error: \\(error!.localizedDescription)\n)\n    } else if user != nil {\n        NSLog(\nUser Created \\(user!.dictionary())\n)\n    }\n} \n\n\n\n\n\n\nLes param\u00e8tres disponibles sont:\n\n\n\n\nusername\n\n\nemail\n\n\npassword\n\n\ncivility\n\n\nfirst_name\n\n\nlast_name\n\n\nmobile\n\n\nbirth_date\n\n\nlocale\n\n\naddress_line_1\n\n\naddress_line_2\n\n\nzip\n\n\ncity\n\n\n\n\nModification d'un utilisateur\n\n\n\n let updatedUser = CDVUser(dictionary: [\n            \nid\n: 70,\n            \nfirst_name\n: \nJean-Edmond\n])\n        CDVManager.sharedInstance().update(updatedUser) { (error) in\n            if (error != nil) {\n                NSLog(\nonUpdateUserButtonClick Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\nUser updated\n)\n            }   \n        }\n\n\n\n\n\nLogin\n\n\n\n CDVManager.sharedInstance().login(withEmail: \nuser@mondomain.com\n, password: \nmonpassword\n) { (error, user) in\n            if (error != nil) {\n                NSLog(\nLogin failed. Error: \\(error!.localizedDescription)\n)\n            } else if user != nil {\n                NSLog(\nUser \\(user!.cdvEmail!) logged with token : \\(user!.cdvToken!)\n)\n            }\n\n        }\n\n\n\n\nR\u00e9cup\u00e9rer les d\u00e9tails sur l'utilisateur logg\u00e9\n\n\n\nCDVManager.sharedInstance().me { (error, user) in\n    if (error != nil) {\n        NSLog(\nonMeButtonLick Error: \\(error!.localizedDescription)\n)\n    } else if user != nil {\n        NSLog(\nMy details \\(user!.dictionary())\n)\n    }\n\n}", 
+            "title": "Login"
+        }, 
+        {
+            "location": "/login/#creation-dun-utilisateur", 
+            "text": "Pour cr\u00e9er un nouvel utilisateur il faut initialiser une instance de CDVUser, puis appeller la m\u00e9thode createUser() du CDVManager  \n let newUser = CDVUser(dictionary: [\n     email :  user@mondomain.com ,\n     password :  monpassword ,\n     first_name :  JeanMichel ])\n\n    CDVManager.sharedInstance().createUser(newUser) { (error, user) in\n    if (error != nil) {\n        NSLog( Creation failed Error: \\(error!.localizedDescription) )\n    } else if user != nil {\n        NSLog( User Created \\(user!.dictionary()) )\n    }\n}   Les param\u00e8tres disponibles sont:   username  email  password  civility  first_name  last_name  mobile  birth_date  locale  address_line_1  address_line_2  zip  city", 
+            "title": "Cr\u00e9ation d'un utilisateur"
+        }, 
+        {
+            "location": "/login/#modification-dun-utilisateur", 
+            "text": "let updatedUser = CDVUser(dictionary: [\n             id : 70,\n             first_name :  Jean-Edmond ])\n        CDVManager.sharedInstance().update(updatedUser) { (error) in\n            if (error != nil) {\n                NSLog( onUpdateUserButtonClick Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( User updated )\n            }   \n        }", 
+            "title": "Modification d'un utilisateur"
+        }, 
+        {
+            "location": "/login/#login", 
+            "text": "CDVManager.sharedInstance().login(withEmail:  user@mondomain.com , password:  monpassword ) { (error, user) in\n            if (error != nil) {\n                NSLog( Login failed. Error: \\(error!.localizedDescription) )\n            } else if user != nil {\n                NSLog( User \\(user!.cdvEmail!) logged with token : \\(user!.cdvToken!) )\n            }\n\n        }", 
+            "title": "Login"
+        }, 
+        {
+            "location": "/login/#recuperer-les-details-sur-lutilisateur-logge", 
+            "text": "CDVManager.sharedInstance().me { (error, user) in\n    if (error != nil) {\n        NSLog( onMeButtonLick Error: \\(error!.localizedDescription) )\n    } else if user != nil {\n        NSLog( My details \\(user!.dictionary()) )\n    }\n\n}", 
+            "title": "R\u00e9cup\u00e9rer les d\u00e9tails sur l'utilisateur logg\u00e9"
+        }, 
+        {
+            "location": "/property_search/", 
+            "text": "L'API permet de rechercher les properties correspondant \u00e0 des crit\u00e8res g\u00e9ographiques, ou des crit\u00e8res de la property (surface, nombre de pi\u00e8ces...)\n\n\nCrit\u00e8res de recherche\n\n\nPour effectuer une recheche il faut cr\u00e9er un objet de type CDVPropertySearch et lui d\u00e9finir les attributs \u00e0 rechercher. Les d\u00e9tails des properties sont d\u00e9crites dans CDVPropertySearch.h\n\n\nIl est possible de limiter une recheche sur des crit\u00e8res g\u00e9ographiques en utilisant des polygones, une distance (en kilom\u00e8tres) autour d'un point, ou une bounding box\n\n\n let propertiesSearch = CDVPropertySearch.init()\n\n propertiesSearch.cdvPageSize = 1\n         propertiesSearch.cdvService = CDVPropertyService.buy\n         propertiesSearch.cdvParentTypes = [\nhouse\n, \napartment\n]\n         propertiesSearch.cdvNbRooms = [2,3]\n         propertiesSearch.cdvMinPrice = 600000\n         propertiesSearch.cdvMaxPrice = 99000\n\n         propertiesSearch.cdvGeoDistances = [CDVGeoDistance(dictionary: [\nlat\n: 48.8834611,\n                                                                         \nlng\n: 2.2652248,\n                                                                         \ndistance\n: 2])]\n         propertiesSearch.cdvGeoPolygons = [CDVGeoPolygon(array: [\n             [\n                 \nlat\n: 45.755225,\n                 \nlng\n: 4.841869\n             ],\n             [\n                 \nlat\n: 45.751333,\n                 \nlng\n: 4.854121\n             ],\n             [\n                 \nlat\n: 45.762097,\n                 \nlng\n: 4.858005\n             ],\n             [\n                 \nlat\n: 45.759567,\n                 \nlng\n: 4.847148\n             ],\n             [\n                 \nlat\n: 45.755225,\n                 \nlng\n: 4.841869\n             ]\n             ])];\n\n         propertiesSearch.cdvGeoBoundingBox = CDVGeoBoundingBox(array:\n             [\n                 [\n                     \nlng\n: -7.237292528124954,\n                     \nlat\n: 52.36947753602144\n                 ],\n                 [\n                     \nlng\n: 11.637219190625046,\n                     \nlat\n: 40.036761141167766\n                 ]\n             ]);\n\n\n\n\n\nRecherche pour obtenir une liste\n\n\nUne fois l'objet CDVPropertySearch cr\u00e9\u00e9 il est possible de recherche les properties correspondantes\n\n\n\n CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in\nif (error != nil) {\n    NSLog(\ngetPropertiesWithSearch Error: \\(error!.localizedDescription)\n)\n} else {\n    NSLog(\n\\(totalProperties) properties found with this search but \\(properties!.count) received \\(String(describing: properties))\n)\n    for details in properties!\n    {\n        NSLog(\nProperty details\\(String(describing: details))\n)\n    }\n}}\n\n\n\n\nPour obtenir les r\u00e9sultats suivants (c-a-d la page suivante) il faut incr\u00e9menter la property \ncdvPage\n de l'objet \nCDVPropertySearch\n  La premi\u00e8re page a l'index \n1\n, la seconde page a l'index \n2\n, etc-etc...\n\n\n\n     propertiesSearch.cdvPage = 2\n CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in\nif (error != nil) {\n    NSLog(\ngetPropertiesWithSearch Error: \\(error!.localizedDescription)\n)\n} else {\n    NSLog(\n\\(totalProperties) properties found with this search but \\(properties!.count) received \\(String(describing: properties))\n)\n    for details in properties!\n    {\n        NSLog(\nProperty details\\(String(describing: details))\n)\n    }\n}}\n\n\n\n\nRecherche pour obtenir des cluster \u00e0 fin d'affichage sur une carte\n\n\nCDVManager.sharedInstance().mapProperties(with: propertiesSearch) { (error, clusters, totalProperties) in\n            if (error != nil) {\n                NSLog(\nmapPropertiesWithSearch Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\n\\(totalProperties) properties found with this search and \\(clusters!.count) received\n)\n            }\n        }\n\n\n\n\nRecherche du nombre de properties\n\n\nCette recherche permet d'obtenir uniquement le nombre de properties correspondant \u00e0 une recherche, et non d\u00e9tails sur les properties\n\n\nCDVManager.sharedInstance().countProperties(with: propertiesSearch) { (error, totalProperties) in\n            if (error != nil) {\n                NSLog(\ncountPropertiesWithSearch Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\n\\(totalProperties) properties found with this search\n)\n            }\n        }\n\n\n\n\nRecherche des propri\u00e9t\u00e9s par ID\n\n\n CDVManager.sharedInstance().getPropertiesWithIds([42], completion: { (error, propertiesSearchedById) in\n            if (error != nil) {\n                NSLog(\ngetPropertiesWithIds Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\n\\(propertiesSearchedById!.count) properties retrieved with ids: \\(String(describing: propertiesSearchedById))\n)\n\n            }\n        });", 
+            "title": "Recherche de properties"
+        }, 
+        {
+            "location": "/property_search/#criteres-de-recherche", 
+            "text": "Pour effectuer une recheche il faut cr\u00e9er un objet de type CDVPropertySearch et lui d\u00e9finir les attributs \u00e0 rechercher. Les d\u00e9tails des properties sont d\u00e9crites dans CDVPropertySearch.h  Il est possible de limiter une recheche sur des crit\u00e8res g\u00e9ographiques en utilisant des polygones, une distance (en kilom\u00e8tres) autour d'un point, ou une bounding box   let propertiesSearch = CDVPropertySearch.init()\n\n propertiesSearch.cdvPageSize = 1\n         propertiesSearch.cdvService = CDVPropertyService.buy\n         propertiesSearch.cdvParentTypes = [ house ,  apartment ]\n         propertiesSearch.cdvNbRooms = [2,3]\n         propertiesSearch.cdvMinPrice = 600000\n         propertiesSearch.cdvMaxPrice = 99000\n\n         propertiesSearch.cdvGeoDistances = [CDVGeoDistance(dictionary: [ lat : 48.8834611,\n                                                                          lng : 2.2652248,\n                                                                          distance : 2])]\n         propertiesSearch.cdvGeoPolygons = [CDVGeoPolygon(array: [\n             [\n                  lat : 45.755225,\n                  lng : 4.841869\n             ],\n             [\n                  lat : 45.751333,\n                  lng : 4.854121\n             ],\n             [\n                  lat : 45.762097,\n                  lng : 4.858005\n             ],\n             [\n                  lat : 45.759567,\n                  lng : 4.847148\n             ],\n             [\n                  lat : 45.755225,\n                  lng : 4.841869\n             ]\n             ])];\n\n         propertiesSearch.cdvGeoBoundingBox = CDVGeoBoundingBox(array:\n             [\n                 [\n                      lng : -7.237292528124954,\n                      lat : 52.36947753602144\n                 ],\n                 [\n                      lng : 11.637219190625046,\n                      lat : 40.036761141167766\n                 ]\n             ]);", 
+            "title": "Crit\u00e8res de recherche"
+        }, 
+        {
+            "location": "/property_search/#recherche-pour-obtenir-une-liste", 
+            "text": "Une fois l'objet CDVPropertySearch cr\u00e9\u00e9 il est possible de recherche les properties correspondantes  \n CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in\nif (error != nil) {\n    NSLog( getPropertiesWithSearch Error: \\(error!.localizedDescription) )\n} else {\n    NSLog( \\(totalProperties) properties found with this search but \\(properties!.count) received \\(String(describing: properties)) )\n    for details in properties!\n    {\n        NSLog( Property details\\(String(describing: details)) )\n    }\n}}  Pour obtenir les r\u00e9sultats suivants (c-a-d la page suivante) il faut incr\u00e9menter la property  cdvPage  de l'objet  CDVPropertySearch   La premi\u00e8re page a l'index  1 , la seconde page a l'index  2 , etc-etc...  \n     propertiesSearch.cdvPage = 2\n CDVManager.sharedInstance().getPropertiesWith(propertiesSearch) { (error, properties, totalProperties) in\nif (error != nil) {\n    NSLog( getPropertiesWithSearch Error: \\(error!.localizedDescription) )\n} else {\n    NSLog( \\(totalProperties) properties found with this search but \\(properties!.count) received \\(String(describing: properties)) )\n    for details in properties!\n    {\n        NSLog( Property details\\(String(describing: details)) )\n    }\n}}", 
+            "title": "Recherche pour obtenir une liste"
+        }, 
+        {
+            "location": "/property_search/#recherche-pour-obtenir-des-cluster-a-fin-daffichage-sur-une-carte", 
+            "text": "CDVManager.sharedInstance().mapProperties(with: propertiesSearch) { (error, clusters, totalProperties) in\n            if (error != nil) {\n                NSLog( mapPropertiesWithSearch Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( \\(totalProperties) properties found with this search and \\(clusters!.count) received )\n            }\n        }", 
+            "title": "Recherche pour obtenir des cluster \u00e0 fin d'affichage sur une carte"
+        }, 
+        {
+            "location": "/property_search/#recherche-du-nombre-de-properties", 
+            "text": "Cette recherche permet d'obtenir uniquement le nombre de properties correspondant \u00e0 une recherche, et non d\u00e9tails sur les properties  CDVManager.sharedInstance().countProperties(with: propertiesSearch) { (error, totalProperties) in\n            if (error != nil) {\n                NSLog( countPropertiesWithSearch Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( \\(totalProperties) properties found with this search )\n            }\n        }", 
+            "title": "Recherche du nombre de properties"
+        }, 
+        {
+            "location": "/property_search/#recherche-des-proprietes-par-id", 
+            "text": "CDVManager.sharedInstance().getPropertiesWithIds([42], completion: { (error, propertiesSearchedById) in\n            if (error != nil) {\n                NSLog( getPropertiesWithIds Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( \\(propertiesSearchedById!.count) properties retrieved with ids: \\(String(describing: propertiesSearchedById)) )\n\n            }\n        });", 
+            "title": "Recherche des propri\u00e9t\u00e9s par ID"
+        }, 
+        {
+            "location": "/alerts/", 
+            "text": "Une alerte permet \u00e0 l'utilisateur d'\u00eatre notifi\u00e9 par email quand des biens correspondants \u00e0 ses crit\u00e8res sont ajout\u00e9s.\n\n\nCr\u00e9er une nouvelle alerte\n\n\n let alert = CDVAlert()\nalert.cdvName = \nNouvelle alerte\n;\nalert.cdvMinPrice = 90000;\nalert.cdvMinArea = 90;\nalert.cdvEmail = CDVManager.sharedInstance().connectedUser!.cdvEmail\nCDVManager.sharedInstance().createAlert(alert) { (error, alertCreated) in\n    if (error != nil) {\n        NSLog(\nFailed to create alert: \\(error!.localizedDescription)\n)\n    } else {\n        NSLog(\nAlert created\n)\n        }\n}\n\n\n\n\n\nRecherche les alertes actives\n\n\n    CDVManager.sharedInstance().getAlertsWithCompletion() { (error, alerts) in\n            if (error != nil) {\n                NSLog(\ngetAlertsWithCompletion Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\n\\(alerts!.count) alerts retrieved\n)\n            }\n        }\n\n\n\n\nMettre \u00e0 jour une alerte existante\n\n\nIl est possible d'\u00e9diter les properties d'une alerte existante de de mettre \u00e0 jour ces modifications\n\n\n alertCreated!.cdvName = \nAlerte \\(alerts!.count+1)\n\n                        CDVManager.sharedInstance().update(alertCreated, completion: { (error) in\n                            if (error != nil) {\n                                NSLog(\nupdate Error: \\(error!.localizedDescription)\n)\n                            } else {\n                                NSLog(\nAlert updated\n)\n                            }\n                        })\n\n\n\n\nSupprimer une alerte\n\n\n CDVManager.sharedInstance().delete(existingAlert) { (error) in\n            if (error != nil) {\n                NSLog(\nFailed to delete alert: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\nAlert deleted\n)\n            }\n        }", 
+            "title": "Alertes"
+        }, 
+        {
+            "location": "/alerts/#creer-une-nouvelle-alerte", 
+            "text": "let alert = CDVAlert()\nalert.cdvName =  Nouvelle alerte ;\nalert.cdvMinPrice = 90000;\nalert.cdvMinArea = 90;\nalert.cdvEmail = CDVManager.sharedInstance().connectedUser!.cdvEmail\nCDVManager.sharedInstance().createAlert(alert) { (error, alertCreated) in\n    if (error != nil) {\n        NSLog( Failed to create alert: \\(error!.localizedDescription) )\n    } else {\n        NSLog( Alert created )\n        }\n}", 
+            "title": "Cr\u00e9er une nouvelle alerte"
+        }, 
+        {
+            "location": "/alerts/#recherche-les-alertes-actives", 
+            "text": "CDVManager.sharedInstance().getAlertsWithCompletion() { (error, alerts) in\n            if (error != nil) {\n                NSLog( getAlertsWithCompletion Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( \\(alerts!.count) alerts retrieved )\n            }\n        }", 
+            "title": "Recherche les alertes actives"
+        }, 
+        {
+            "location": "/alerts/#mettre-a-jour-une-alerte-existante", 
+            "text": "Il est possible d'\u00e9diter les properties d'une alerte existante de de mettre \u00e0 jour ces modifications   alertCreated!.cdvName =  Alerte \\(alerts!.count+1) \n                        CDVManager.sharedInstance().update(alertCreated, completion: { (error) in\n                            if (error != nil) {\n                                NSLog( update Error: \\(error!.localizedDescription) )\n                            } else {\n                                NSLog( Alert updated )\n                            }\n                        })", 
+            "title": "Mettre \u00e0 jour une alerte existante"
+        }, 
+        {
+            "location": "/alerts/#supprimer-une-alerte", 
+            "text": "CDVManager.sharedInstance().delete(existingAlert) { (error) in\n            if (error != nil) {\n                NSLog( Failed to delete alert: \\(error!.localizedDescription) )\n            } else {\n                NSLog( Alert deleted )\n            }\n        }", 
+            "title": "Supprimer une alerte"
+        }, 
+        {
+            "location": "/favorites/", 
+            "text": "Marquer une property comme favorites\n\n\n  CDVManager.sharedInstance().createFavorite(existingProperty, completion: { (error) in\n                        if (error != nil) {\n                            NSLog(\nFailed to create favorite: \\(error!.localizedDescription)\n)\n                        } else {\n                            NSLog(\nFavorite created\n)\n                            }\n                            }\n\n\n\n\nSupprimer un favori\n\n\n  CDVManager.sharedInstance().deleteFavorite(existingProperty, completion: { (error) in\n                        if (error != nil) {\n                            NSLog(\nFailed to delete favorite: \\(error!.localizedDescription)\n)\n                        } else {\n                            NSLog(\nFavorite deleted\n)\n                            }\n                            }\n\n\n\n\nR\u00e9cup\u00e9rer les favoris de l'utilisateur\n\n\n CDVManager.sharedInstance().getFavoritesWithCompletion({ (error, favorites) in\n                                if (error != nil) {\n                                    NSLog(\ngetFavoritesWithCompletion Error: \\(error!.localizedDescription)\n)\n                                } else {\n                                    NSLog(\n\\(favorites!.count) favorites for this user\n)\n                                }\n                            })", 
+            "title": "Favoris"
+        }, 
+        {
+            "location": "/favorites/#marquer-une-property-comme-favorites", 
+            "text": "CDVManager.sharedInstance().createFavorite(existingProperty, completion: { (error) in\n                        if (error != nil) {\n                            NSLog( Failed to create favorite: \\(error!.localizedDescription) )\n                        } else {\n                            NSLog( Favorite created )\n                            }\n                            }", 
+            "title": "Marquer une property comme favorites"
+        }, 
+        {
+            "location": "/favorites/#supprimer-un-favori", 
+            "text": "CDVManager.sharedInstance().deleteFavorite(existingProperty, completion: { (error) in\n                        if (error != nil) {\n                            NSLog( Failed to delete favorite: \\(error!.localizedDescription) )\n                        } else {\n                            NSLog( Favorite deleted )\n                            }\n                            }", 
+            "title": "Supprimer un favori"
+        }, 
+        {
+            "location": "/favorites/#recuperer-les-favoris-de-lutilisateur", 
+            "text": "CDVManager.sharedInstance().getFavoritesWithCompletion({ (error, favorites) in\n                                if (error != nil) {\n                                    NSLog( getFavoritesWithCompletion Error: \\(error!.localizedDescription) )\n                                } else {\n                                    NSLog( \\(favorites!.count) favorites for this user )\n                                }\n                            })", 
+            "title": "R\u00e9cup\u00e9rer les favoris de l'utilisateur"
+        }, 
+        {
+            "location": "/poi/", 
+            "text": "Cr\u00e9er un POI\n\n\nIl est n\u00e9cessaire de cr\u00e9er un objet de type \nCDVPOI\n puis de le sauver\n\n\n\n let newPOI = CDVPOI(dictionary: [\n                    \nname\n: \nNew POI\n,\n                    \ndescription\n: \nDescription of my POI  \n,\n                    \nlat\n: 48.8834611,\n                    \nlng\n: 2.2652248,\n                    \nlink\n: \nbicycling\n,\n                    \nchrono_map\n: [\n                        \ntime5\n,\n                        \ntime10\n,\n                        \ntime15\n\n                    ]\n                ])\n\n        CDVManager.sharedInstance().createPOI(newPOI) { (error, poiCreated) in\n            if (error != nil) {\n                NSLog(\ncreatePOI Error: \\(error!.localizedDescription)\n)\n            } else {\n                NSLog(\nPOI created\n)\n\n            }}\n\n\n\n\n\n\nR\u00e9cup\u00e9rer les POIs existants\n\n\n CDVManager.sharedInstance().getPOIs { (error, pois) in\n                if error != nil {\n                    NSLog(\nFailed to get POIs \\(error!.localizedDescription)\n)\n                }\n                }\n\n\n\n\nMettre \u00e0 jour un POI\n\n\n existingPOI!.cdvName = \nUpdated \\(poiCreated!.cdvName)\n\n                        CDVManager.sharedInstance().update(existingPOI!) { (error) in\n                            if (error != nil) {\n                                NSLog(\nupdatePOI Error: \\(error!.localizedDescription)\n)\n                            }\n                        }\n\n\n\n\nSupprimer un POI\n\n\n        CDVManager.sharedInstance().delete(existingPOI) { (error) in\n            if error != nil {\n                NSLog(\nFailed to delete POI \\(error!.localizedDescription)\n)\n            }\n        }", 
+            "title": "POIs"
+        }, 
+        {
+            "location": "/poi/#creer-un-poi", 
+            "text": "Il est n\u00e9cessaire de cr\u00e9er un objet de type  CDVPOI  puis de le sauver  \n let newPOI = CDVPOI(dictionary: [\n                     name :  New POI ,\n                     description :  Description of my POI   ,\n                     lat : 48.8834611,\n                     lng : 2.2652248,\n                     link :  bicycling ,\n                     chrono_map : [\n                         time5 ,\n                         time10 ,\n                         time15 \n                    ]\n                ])\n\n        CDVManager.sharedInstance().createPOI(newPOI) { (error, poiCreated) in\n            if (error != nil) {\n                NSLog( createPOI Error: \\(error!.localizedDescription) )\n            } else {\n                NSLog( POI created )\n\n            }}", 
+            "title": "Cr\u00e9er un POI"
+        }, 
+        {
+            "location": "/poi/#recuperer-les-pois-existants", 
+            "text": "CDVManager.sharedInstance().getPOIs { (error, pois) in\n                if error != nil {\n                    NSLog( Failed to get POIs \\(error!.localizedDescription) )\n                }\n                }", 
+            "title": "R\u00e9cup\u00e9rer les POIs existants"
+        }, 
+        {
+            "location": "/poi/#mettre-a-jour-un-poi", 
+            "text": "existingPOI!.cdvName =  Updated \\(poiCreated!.cdvName) \n                        CDVManager.sharedInstance().update(existingPOI!) { (error) in\n                            if (error != nil) {\n                                NSLog( updatePOI Error: \\(error!.localizedDescription) )\n                            }\n                        }", 
+            "title": "Mettre \u00e0 jour un POI"
+        }, 
+        {
+            "location": "/poi/#supprimer-un-poi", 
+            "text": "CDVManager.sharedInstance().delete(existingPOI) { (error) in\n            if error != nil {\n                NSLog( Failed to delete POI \\(error!.localizedDescription) )\n            }\n        }", 
+            "title": "Supprimer un POI"
+        }
+    ]
+}
