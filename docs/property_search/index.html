@@ -87,6 +87,15 @@
     <li class="toctree-l2"><a href="#recherche-des-proprietes-par-id">Recherche des propriétés par ID</a></li>
     
 
+    <li class="toctree-l2"><a href="#tri-des-proprietes">Tri des propriétés</a></li>
+    
+
+    <li class="toctree-l2"><a href="#parent-types-type-des-proprietes">Parent types (Type des propriétés)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#style-types-style-des-proprietes">Style types (Style des propriétés)</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -144,6 +153,7 @@
 <pre><code class="swift"> let propertiesSearch = CDVPropertySearch.init()
 
  propertiesSearch.cdvPageSize = 1
+ propertiesSearch.cdvSort = .none
          propertiesSearch.cdvService = CDVPropertyService.buy
          propertiesSearch.cdvParentTypes = [&quot;house&quot;, &quot;apartment&quot;]
          propertiesSearch.cdvNbRooms = [2,3]
@@ -250,6 +260,48 @@ if (error != nil) {
 
             }
         });
+
+</code></pre>
+
+<h1 id="tri-des-proprietes">Tri des propriétés</h1>
+<pre><code class="swift">
+propertiesSearch.cdvSort = .none
+
+/* Possible values (CDVPropertySort):
+ * .none
+ * .new
+ * .priceAsc
+ * .priceDesc
+ * .pricePerMeterAsc
+ * .pricePerMeterDesc
+ * .surfaceAsc
+ * .surfaceDesc
+ */
+
+</code></pre>
+
+<h1 id="parent-types-type-des-proprietes">Parent types (Type des propriétés)</h1>
+<pre><code class="swift">propertiesSearch.cdvParentTypes = [&quot;house&quot;, &quot;apartment&quot;]
+
+/* Possible values (Array of Strings):
+ * - 'apartment'
+ * - 'local'
+ * - 'house'
+ * - 'field'
+ * - 'parking'
+ * - 'other'
+ */
+
+</code></pre>
+
+<h1 id="style-types-style-des-proprietes">Style types (Style des propriétés)</h1>
+<pre><code class="swift">propertiesSearch.cdvStyleTypes = [&quot;renovate&quot;, &quot;prestige&quot;]
+
+/* Possible values (Array of Strings):
+ * - 'renovate'
+ * - 'prestige'
+ * - 'campaign'
+ */
 
 </code></pre>
               

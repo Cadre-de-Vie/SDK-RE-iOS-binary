@@ -13,8 +13,25 @@
 #import "CDVGeoPolygon.h"
 #import "CDVGeoBoundingBox.h"
 
+typedef NS_ENUM(NSInteger, CDVPropertySort) { // 'none', 'new', 'ascending_price', 'descending_price', 'ascending_price_per_meter', 'descending_price_per_meter', 'ascending_surface', 'descending_surface', 'ascending_distance', 'descending_distance'
+    CDVPropertySortNone,
+    CDVPropertySortNew,
+    CDVPropertySortPriceAsc,
+    CDVPropertySortPriceDesc,
+    CDVPropertySortPricePerMeterAsc,
+    CDVPropertySortPricePerMeterDesc,
+    CDVPropertySortSurfaceAsc,
+    CDVPropertySortSurfaceDesc,
+//    CDVPropertySortDistanceAsc,
+//    CDVPropertySortDistanceDesc,
+};
+
 @interface CDVPropertySearch : CDVObjectModel
 
+/**
+ Property search Sort
+ */
+@property (nonatomic) CDVPropertySort cdvSort;
 
 /**
  Property search Page Size (Number of items in results)
