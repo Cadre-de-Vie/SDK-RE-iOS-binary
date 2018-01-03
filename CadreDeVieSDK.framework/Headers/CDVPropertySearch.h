@@ -22,8 +22,8 @@ typedef NS_ENUM(NSInteger, CDVPropertySort) { // 'none', 'new', 'ascending_price
     CDVPropertySortPricePerMeterDesc,
     CDVPropertySortSurfaceAsc,
     CDVPropertySortSurfaceDesc,
-//    CDVPropertySortDistanceAsc,
-//    CDVPropertySortDistanceDesc,
+    CDVPropertySortDistanceAsc,
+    CDVPropertySortDistanceDesc,
 };
 
 @interface CDVPropertySearch : CDVObjectModel

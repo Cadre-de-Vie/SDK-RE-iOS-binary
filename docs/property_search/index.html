@@ -96,6 +96,9 @@
     <li class="toctree-l2"><a href="#style-types-style-des-proprietes">Style types (Style des propriétés)</a></li>
     
 
+    <li class="toctree-l2"><a href="#cdvpropertycdvotherdatas-donnees-complementaires">CDVProperty.cdvOtherDatas (données complementaires)</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -302,6 +305,103 @@ propertiesSearch.cdvSort = .none
  * - 'prestige'
  * - 'campaign'
  */
+
+</code></pre>
+
+<h1 id="cdvpropertycdvotherdatas-donnees-complementaires">CDVProperty.cdvOtherDatas (données complementaires)</h1>
+<p>Chaque propriété comprend une propriété '.cdvOtherDatas' qui regroupe tout les informations de l'api non accessible directement via les autres propriété de l'objet CDVProperty.</p>
+<p>Ci-desssous le model de donnée tel que retourné par l'api:</p>
+<pre><code class="swift">
+{
+  &quot;id&quot;: 0,
+  &quot;flow_id&quot;: 0,
+  &quot;reference&quot;: &quot;string&quot;,
+  &quot;title&quot;: &quot;string&quot;,
+  &quot;description&quot;: &quot;string&quot;,
+  &quot;lot&quot;: true,
+  &quot;area&quot;: 0,
+  &quot;price&quot;: 0,
+  &quot;price_per_meter&quot;: 0,
+  &quot;rent&quot;: 0,
+  &quot;images&quot;: [
+    &quot;string&quot;
+  ],
+  &quot;type_label&quot;: &quot;string&quot;,
+  &quot;nb_rooms&quot;: 0,
+  &quot;nb_bed_rooms&quot;: 0,
+  &quot;location&quot;: {
+    &quot;lat&quot;: 0,
+    &quot;lng&quot;: 0
+  },
+  &quot;city&quot;: &quot;string&quot;,
+  &quot;zip&quot;: &quot;string&quot;,
+  &quot;virtual_visit&quot;: &quot;string&quot;,
+  &quot;ad_url&quot;: &quot;string&quot;,
+  &quot;stay_area&quot;: 0,
+  &quot;year_of_construction&quot;: 0,
+  &quot;exposure&quot;: &quot;string&quot;,
+  &quot;kitchen&quot;: &quot;string&quot;,
+  &quot;nb_bathrooms&quot;: 0,
+  &quot;nb_water_rooms&quot;: 0,
+  &quot;attic&quot;: 0,
+  &quot;terrace&quot;: 0,
+  &quot;nearby_transport&quot;: &quot;string&quot;,
+  &quot;nearby_school&quot;: &quot;string&quot;,
+  &quot;nearby_commerce&quot;: &quot;string&quot;,
+  &quot;heating_type&quot;: &quot;string&quot;,
+  &quot;nb_floors&quot;: 0,
+  &quot;elevator&quot;: true,
+  &quot;nb_parkings&quot;: 0,
+  &quot;parking_type&quot;: &quot;string&quot;,
+  &quot;field_area&quot;: 0,
+  &quot;style&quot;: &quot;string&quot;,
+  &quot;nb_levels&quot;: true,
+  &quot;nb_ground_floor_rooms&quot;: 0,
+  &quot;nb_wcs&quot;: 0,
+  &quot;basement&quot;: true,
+  &quot;veranda&quot;: true,
+  &quot;garage&quot;: true,
+  &quot;nb_garage_slots&quot;: 0,
+  &quot;outbuildings&quot;: &quot;string&quot;,
+  &quot;swimming_pool&quot;: true,
+  &quot;intercom&quot;: true,
+  &quot;green_spaces&quot;: true,
+  &quot;loggia&quot;: true,
+  &quot;balcony&quot;: true,
+  &quot;private_garden&quot;: true,
+  &quot;heating&quot;: &quot;string&quot;,
+  &quot;heating_energy&quot;: &quot;string&quot;,
+  &quot;heating_mechanism&quot;: &quot;string&quot;,
+  &quot;inner_state&quot;: &quot;string&quot;,
+  &quot;dpe_label_gaz&quot;: &quot;string&quot;,
+  &quot;dpe_value_gaz&quot;: 0,
+  &quot;dpe_label_consumption&quot;: &quot;string&quot;,
+  &quot;dpe_value_consumption&quot;: 0,
+  &quot;agency&quot;: {
+    &quot;flow_id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;reg_name&quot;: &quot;string&quot;,
+    &quot;reg_siret&quot;: &quot;string&quot;,
+    &quot;email&quot;: &quot;string&quot;,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;street&quot;: &quot;string&quot;,
+    &quot;zip&quot;: &quot;string&quot;,
+    &quot;city&quot;: &quot;string&quot;,
+    &quot;country&quot;: &quot;string&quot;
+  },
+  &quot;developer&quot;: {
+    &quot;flow_id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;reg_name&quot;: &quot;string&quot;,
+    &quot;reg_siret&quot;: &quot;string&quot;,
+    &quot;email&quot;: &quot;string&quot;,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;street&quot;: &quot;string&quot;,
+    &quot;zip&quot;: &quot;string&quot;,
+    &quot;city&quot;: &quot;string&quot;,
+    &quot;country&quot;: &quot;string&quot;
+  }
+}
 
 </code></pre>
               
