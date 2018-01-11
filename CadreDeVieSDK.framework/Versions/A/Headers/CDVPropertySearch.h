@@ -133,6 +133,11 @@ typedef NS_ENUM(NSInteger, CDVPropertySort) { // 'none', 'new', 'ascending_price
 @property (nonatomic, retain) CDVGeoBoundingBox *cdvGeoBoundingBox;
 
 /**
+ Property search geo precision
+ */
+@property (nonatomic, retain) NSString *cdvGeoPrecision;
+
+/**
  Property search free query
  */
 @property (nonatomic, retain) NSString *cdvQuery;

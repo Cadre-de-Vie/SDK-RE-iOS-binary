@@ -23,6 +23,30 @@
  */
 @property (nonatomic, retain, readonly) NSString *cdvName;
 
+
+/**
+ Contact Registered Name
+ */
+@property (nonatomic, retain, readonly) NSString *cdvRegName;
+
+
+/**
+ Contact Registered Siret
+ */
+@property (nonatomic, retain, readonly) NSString *cdvRegSiret;
+
+
+/**
+ Contact Email
+ */
+@property (nonatomic, retain, readonly) NSString *cdvEmail;
+
+
+/**
+ Contact Phone
+ */
+@property (nonatomic, retain, readonly) NSString *cdvPhone;
+
 /**
  Contact Street
  */
