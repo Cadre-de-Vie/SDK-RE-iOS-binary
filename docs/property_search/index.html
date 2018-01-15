@@ -96,6 +96,9 @@
     <li class="toctree-l2"><a href="#style-types-style-des-proprietes">Style types (Style des propriétés)</a></li>
     
 
+    <li class="toctree-l2"><a href="#geo-precision-parametrage">Geo Precision (paramétrage)</a></li>
+    
+
     <li class="toctree-l2"><a href="#cdvpropertycdvotherdatas-donnees-complementaires">CDVProperty.cdvOtherDatas (données complementaires)</a></li>
     
 
@@ -304,6 +307,20 @@ propertiesSearch.cdvSort = .none
  * - 'renovate'
  * - 'prestige'
  * - 'campaign'
+ */
+
+</code></pre>
+
+<h1 id="geo-precision-parametrage">Geo Precision (paramétrage)</h1>
+<p>The GeoHashgrid precision can either be defined in terms of the integer precision levels mentioned in the Elastic Search documentation.
+Values outside of [1,12] will be rejected.
+Alternatively, the precision level can be approximated from a distance measure like "1km", "10m"
+(cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)</p>
+<pre><code class="swift">propertiesSearch.cdvGeoPrecision = &quot;2&quot;
+
+/* 2 types of possible values (String):
+ * - GeoHashgrid code: '1', '2', ..., '12'
+ * - Distances: '1m', '10km'
  */
 
 </code></pre>
