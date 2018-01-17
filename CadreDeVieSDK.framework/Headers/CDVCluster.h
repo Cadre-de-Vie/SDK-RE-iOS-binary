@@ -51,5 +51,10 @@
  */
 @property (nonatomic, retain, readonly) NSArray<NSNumber *> *cdvPropertiesIds;
 
+/**
+ Cluster is single point
+ */
+@property (nonatomic, readonly) Boolean cdvSinglePoint;
+
 
 @end
