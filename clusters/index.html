@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Installation - CDV SDK iOS</title>
+  <title>Clusters - CDV SDK iOS</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Installation";
-    var mkdocs_page_input_path = "installation.md";
-    var mkdocs_page_url = "/installation/";
+    var mkdocs_page_name = "Clusters";
+    var mkdocs_page_input_path = "clusters.md";
+    var mkdocs_page_url = "/clusters/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -52,21 +52,9 @@
     <a class="" href="..">Home</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Installation</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#integration-dans-le-projet">Intégration dans le projet</a></li>
-    
-
-    <li class="toctree-l2"><a href="#ajout-dans-le-infoplist">Ajout dans le Info.plist</a></li>
-    
-
-    <li class="toctree-l2"><a href="#import-du-sdk">Import du SDK</a></li>
-    
-
-    </ul>
+    <a class="" href="../installation/">Installation</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -84,9 +72,15 @@
     <a class="" href="../property_search/">Recherche de properties</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../clusters/">Clusters</a>
+    <a class="current" href="./">Clusters</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#object-cdvcluster">Object CDVCluster</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -126,7 +120,7 @@
     
       
     
-    <li>Installation</li>
+    <li>Clusters</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -136,33 +130,35 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="integration-dans-le-projet">Intégration dans le projet</h2>
-<ul>
-<li>Glisser-déposer le fichier <code>CadreDeVieSDK.framework</code> dans votre projet Xcode</li>
-<li>Sélectionner la target de votre application et l'onglet "General"</li>
-<li>Depuis le Project Navigator de Xcode glisser  <code>CadreDeVieSDK.framework</code> sur la section <code>Linked Frameworks and Libraries</code></li>
-<li>Attention: ne <em>pas</em> rajouter le SDK dans la section <code>Embedded Binaries</code></li>
-</ul>
-<h2 id="ajout-dans-le-infoplist">Ajout dans le Info.plist</h2>
-<p>Les clés suivantes doivent être rajoutées dans votre fichier Info.plist:</p>
-<ul>
-<li><code>CDVBaseUri</code><ul>
-<li>Type: <code>String</code></li>
-<li>La valeur à saisir est <code>https://api.prod.cadredevie.fr</code></li>
-</ul>
-</li>
-<li><code>CDVPartnerApiKey</code><ul>
-<li>Type: <code>String</code></li>
-<li>Cette valeur sera founie par CadreDeVie</li>
-</ul>
-</li>
-</ul>
-<h2 id="import-du-sdk">Import du SDK</h2>
-<p>Pour utilser le SDK il est nécessaire d'importer le SDK depuis toutes les classes qui vont l'utiliser.</p>
-<pre><code class="swift">@import CadreDeVieSDK
-</code></pre>
+                <h1 id="object-cdvcluster">Object CDVCluster</h1>
+<pre><code class="swift">// Cluster Properties count in cluster
+NSNumber *cdvCount
 
-<pre><code class="objc">@import CadreDeVieSDK;
+// Cluster Latitude
+NSNumber *cdvLat
+
+// Cluster Longitude
+NSNumber *cdvLng
+
+
+// Cluster Minimal Latitude in cluster
+NSNumber *cdvMinLat
+
+// Cluster Minimal Longitude in cluster
+NSNumber *cdvMinLng
+
+
+// Cluster Maximal Latitude in cluster
+NSNumber *cdvMaxLat
+
+// Cluster Maximal Longitude in cluster
+NSNumber *cdvMaxLng
+
+// Cluster List of properties Ids in cluster
+NSArray&lt;NSNumber *&gt; *cdvPropertiesIds;
+
+// Cluster is single point
+Boolean cdvSinglePoint
 </code></pre>
               
             </div>
@@ -171,10 +167,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../concepts/" class="btn btn-neutral float-right" title="Concepts">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../alerts/" class="btn btn-neutral float-right" title="Alertes">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../property_search/" class="btn btn-neutral" title="Recherche de properties"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -200,10 +196,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../property_search/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../concepts/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../alerts/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
