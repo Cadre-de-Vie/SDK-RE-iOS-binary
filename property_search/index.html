@@ -332,7 +332,7 @@ Alternatively, the precision level can be approximated from a distance measure l
 
 <h1 id="cdvpropertycdvotherdatas-donnees-complementaires">CDVProperty.cdvOtherDatas (données complementaires)</h1>
 <p>Chaque propriété comprend une propriété '.cdvOtherDatas' qui regroupe tout les informations de l'api non accessible directement via les autres propriété de l'objet CDVProperty.</p>
-<p>Ci-desssous le model de donnée tel que retourné par l'api:</p>
+<p>Ci-desssous le model de donnée tel que retourné par l'api .getPropertiesWithIds:</p>
 <pre><code class="swift">
 {
   id (integer): CDV's DB reference ,
@@ -425,6 +425,68 @@ contact {
   zip (string, optional),
   city (string, optional),
   country (string, optional)
+}
+
+</code></pre>
+
+<p>Ci-desssous le model de donnée tel que retourné par l'api .getPropertiesWith(propertiesSearch):</p>
+<pre><code class="swift">
+property {
+id (integer): CDV’s DB reference ,
+flow_id (string): Flux provider DB reference ,
+reference (string, optional): Reference of the property ,
+title (string, optional): Original title (if exists) ,
+description (string, optional): Long text description ,
+city (string, optional): City location of the property ,
+zip (string, optional): Zipcode of the city ,
+location (location, optional): GPS coordinates of the property ,
+area (number, optional): Normalized area ,
+nb_rooms (integer, optional): Number of standard rooms ,
+nb_bed_rooms (integer, optional): Number of standard bedrooms ,
+cover (string, optional): URL of the cover photo ,
+images (Array[string], optional): URLs of the photos ,
+virtualVisit (string, optional): URL of the virtual visit ,
+price (number, optional): Net price ,
+price_per_meter (number, optional): Calculated ratio ,
+priceExclFees (number, optional): Price excluding fees ,
+payerFees (string, optional): Label of the payer(s) (in French) ,
+buyerFees (boolean, optional): Must the buyer pay the fees? ,
+sellerFees (boolean, optional): Must the seller pay the fees? ,
+percentageBuyerFees (number, optional): Percentage fees payed by the buyer ,
+percentageSellerFees (number, optional): Percentage fees payed by the seller ,
+rent (number, optional): Rent price ,
+additionnalRent (number, optional): Additionnal cost to the rent price ,
+monthlyRentIncCharge (number, optional): Rent price including monthly charge(s) ,
+modalityRentalCostRecovery (string, optional): Description of how the initial rental cost is recovered ,
+inventoryFees (number, optional): Cost of the inventory ,
+tenancyLaw (number, optional): Cost of the tenancy law ,
+urlPublicTariff (string, optional): URL of the realtor public tariff (legal notice) ,
+dpeLabelConsumption (string, optional): Energy consumption label (legal notice) ,
+dpeValueConsumption (number, optional): Energy consumption vale (legal notice) ,
+dpeLabelGaz (string, optional): Gas emission label (legal notice) ,
+dpeValueGaz (number, optional): Gas emission vale (legal notice) ,
+type_parent (string, optional): Property type by category = ['parking', 'house', 'apartment', 'local', 'field', 'other'],
+type_label (string, optional): Property type in French (free label) ,
+type_style (string, optional): Property style by category = ['campaign', 'renovate', 'prestige'],
+lot (boolean, optional): Belongs to a program? ,
+contact (contact, optional): Agency or realtor contact ,
+integration_date (string, optional): Datetime &quot;YYYY-MM-DD HH:MM:SS&quot;
+}
+location {
+lat (number): latitude ,
+lng (number): longitude ('lng' for Google Maps API... but use 'lon' for geoJSON, elastic or GIS...)
+}
+contact {
+flow_id (integer): Flux provider DB/file reference ,
+name (string, optional): Commercial or usual name ,
+reg_name (string, optional): Legal registered name (may be different) ,
+reg_number (string, optional): Legal registration number (country related) ,
+email (string, optional): Professionnal e-mail ,
+phone (string, optional): Professionnal phone ,
+street (string, optional): Address of the agency ,
+zip (string, optional): Zipcode of the agency ,
+city (string, optional): City of the agency ,
+country (string, optional): Country of the agency
 }
 
 </code></pre>
