@@ -173,12 +173,12 @@
 <li><code>username</code></li>
 <li><code>email</code></li>
 <li><code>password</code></li>
-<li><code>civility</code></li>
+<li><code>civility</code> - "mr" ou "mrs"</li>
 <li><code>first_name</code></li>
 <li><code>last_name</code></li>
 <li><code>mobile</code></li>
-<li><code>birth_date</code></li>
-<li><code>locale</code></li>
+<li><code>birth_date</code> - Format ISO 8601 "YYYY-MM-DD" (ex: "1999-01-25")</li>
+<li><code>locale</code> - Format ISO 639 (ex: "fr")</li>
 <li><code>address_line_1</code></li>
 <li><code>address_line_2</code></li>
 <li><code>zip</code></li>
@@ -200,6 +200,8 @@
 </code></pre>
 
 <h1 id="login">Login</h1>
+<p>Le SDK permet à l'utilisateur de se logger avec son adresse email, et son mot de passe.
+Une fois le login passée avec succès, le token utilisateur est envoyé automatiquement par le SDK à chaque appel, sans action du développeur.</p>
 <pre><code class="swift">
  CDVManager.sharedInstance().login(withEmail: &quot;user@mondomain.com&quot;, password: &quot;monpassword&quot;) { (error, user) in
             if (error != nil) {
