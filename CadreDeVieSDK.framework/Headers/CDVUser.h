@@ -86,6 +86,11 @@
  */
 @property (nonatomic, retain, readonly) NSString *cdvToken;
 
+/**
+ User temp tokenK to authenticate on CDV (this token expire)
+ */
+@property (nonatomic, retain, readonly) NSString *cdvTokenK;
+
 
 
 @end

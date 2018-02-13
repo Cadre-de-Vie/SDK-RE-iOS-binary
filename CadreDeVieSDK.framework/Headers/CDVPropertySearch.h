@@ -142,4 +142,22 @@ typedef NS_ENUM(NSInteger, CDVPropertySort) { // 'none', 'new', 'ascending_price
  */
 @property (nonatomic, retain) NSString *cdvQuery;
 
+
+/**
+ Property search Hides Cluster rect (map/clustering only)
+ */
+@property (nonatomic) BOOL cdvHideClusterRect;
+
+
+/**
+ Property search Hides Property Id list (map/clustering only)
+ */
+@property (nonatomic) BOOL cdvHidePropertyIds;
+
+
+/**
+ Property search Hides SinglePoint marking (map/clustering only)
+ */
+@property (nonatomic) BOOL cdvHideSinglePoint;
+
 @end

@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, CDVPropertyService) {
 };
 
 typedef NS_ENUM(NSInteger, CDVPropertyAge) {
+    CDVPropertyAgeBoth, // Must be first (0, will not be sent)
     CDVPropertyAgeNew,
-    CDVPropertyAgeOld,
-    CDVPropertyAgeBoth
+    CDVPropertyAgeOld
 };
 
 
