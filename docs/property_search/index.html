@@ -164,55 +164,59 @@
               
                 <p>L'API permet de rechercher les properties correspondant à des critères géographiques, ou des critères de la property (surface, nombre de pièces...)</p>
 <h1 id="criteres-de-recherche">Critères de recherche</h1>
-<p>Pour effectuer une recheche il faut créer un objet de type CDVPropertySearch et lui définir les attributs à rechercher. Les détails des properties sont décrites dans CDVPropertySearch.h</p>
-<p>Il est possible de limiter une recheche sur des critères géographiques en utilisant des polygones, une distance (en kilomètres) autour d'un point, ou une bounding box</p>
+<p>Pour effectuer une recheche, il faut créer un objet de type CDVPropertySearch et lui définir les attributs à rechercher. Les détails des properties sont décrites dans CDVPropertySearch.h</p>
+<p>Il est possible de préciser une recheche avec des critères géographiques en utilisant :<br>
+	- des cercles (cdvGeoDistance) : une distance en kilomètres autour d'un point central en coordonnées GPS (lat,lng). Voir ci-dessous l'autre usage de cdvGeoDistances en tant que filtre des résultats et non plus critère de recherche ;<br>
+	- des polygones (cdvGeoPolygons) : au moins 3 points en coordonnées GPS (lat,lng).</p>
+<p>Il est possible de limiter les résultats retournés à ceux visibles dans le viewport d'une carte :<br>
+	- viewport (cdvGeoBoundingBox) : obligatoirement caractérisé par ses coordonnées GPS, d'abord Nord-Est (lat,lng) puis Sud-Ouest (lat,lng).</p>
 <pre><code class="swift"> let propertiesSearch = CDVPropertySearch.init()
 
  propertiesSearch.cdvPageSize = 1
  propertiesSearch.cdvSort = .none
-         propertiesSearch.cdvService = CDVPropertyService.buy
-         propertiesSearch.cdvParentTypes = [&quot;house&quot;, &quot;apartment&quot;]
-         propertiesSearch.cdvNbRooms = [2,3]
-         propertiesSearch.cdvMinPrice = 600000
-         propertiesSearch.cdvMaxPrice = 99000
+ propertiesSearch.cdvService = CDVPropertyService.buy
+ propertiesSearch.cdvParentTypes = [&quot;house&quot;, &quot;apartment&quot;]
+ propertiesSearch.cdvNbRooms = [2,3]
+ propertiesSearch.cdvMinPrice = 600000
+ propertiesSearch.cdvMaxPrice = 99000
 
-         propertiesSearch.cdvGeoDistances = [CDVGeoDistance(dictionary: [&quot;lat&quot;: 48.8834611,
-                                                                         &quot;lng&quot;: 2.2652248,
-                                                                         &quot;distance&quot;: 2])]
-         propertiesSearch.cdvGeoPolygons = [CDVGeoPolygon(array: [
-             [
-                 &quot;lat&quot;: 45.755225,
-                 &quot;lng&quot;: 4.841869
-             ],
-             [
-                 &quot;lat&quot;: 45.751333,
-                 &quot;lng&quot;: 4.854121
-             ],
-             [
-                 &quot;lat&quot;: 45.762097,
-                 &quot;lng&quot;: 4.858005
-             ],
-             [
-                 &quot;lat&quot;: 45.759567,
-                 &quot;lng&quot;: 4.847148
-             ],
-             [
-                 &quot;lat&quot;: 45.755225,
-                 &quot;lng&quot;: 4.841869
-             ]
-             ])];
+ propertiesSearch.cdvGeoDistances = [CDVGeoDistance(dictionary: [&quot;lat&quot;: 48.8834611,
+								 &quot;lng&quot;: 2.2652248,
+								 &quot;distance&quot;: 2])]
+ propertiesSearch.cdvGeoPolygons = [CDVGeoPolygon(array: [
+     [
+	 &quot;lat&quot;: 45.755225,
+	 &quot;lng&quot;: 4.841869
+     ],
+     [
+	 &quot;lat&quot;: 45.751333,
+	 &quot;lng&quot;: 4.854121
+     ],
+     [
+	 &quot;lat&quot;: 45.762097,
+	 &quot;lng&quot;: 4.858005
+     ],
+     [
+	 &quot;lat&quot;: 45.759567,
+	 &quot;lng&quot;: 4.847148
+     ],
+     [
+	 &quot;lat&quot;: 45.755225,
+	 &quot;lng&quot;: 4.841869
+     ]
+     ])];
 
-         propertiesSearch.cdvGeoBoundingBox = CDVGeoBoundingBox(array:
-             [
-                 [
-                     &quot;lng&quot;: -7.237292528124954,
-                     &quot;lat&quot;: 52.36947753602144
-                 ],
-                 [
-                     &quot;lng&quot;: 11.637219190625046,
-                     &quot;lat&quot;: 40.036761141167766
-                 ]
-             ]);
+ propertiesSearch.cdvGeoBoundingBox = CDVGeoBoundingBox(array:
+     [
+	 [
+	     &quot;lng&quot;: -7.237292528124954,
+	     &quot;lat&quot;: 52.36947753602144
+	 ],
+	 [
+	     &quot;lng&quot;: 11.637219190625046,
+	     &quot;lat&quot;: 40.036761141167766
+	 ]
+     ]);
 
 </code></pre>
 
@@ -257,14 +261,17 @@ if (error != nil) {
 </code></pre>
 
 <h3 id="geo-precision-parametrage">Geo Precision (paramétrage)</h3>
-<p>The GeoHashgrid precision can either be defined in terms of the integer precision levels mentioned in the Elastic Search documentation.
-Values outside of [1,12] will be rejected.
-Alternatively, the precision level can be approximated from a distance measure like "1km", "10m"
-(cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)</p>
+<p>La précsion du regroupement par cluster, maillage ou fonction <em>GeoHashgrid</em>, définie de 3 façons :<br>
+	- la valeur zéro "0" : indique que le calcul des clusters doit être désactivé pour renvoyer la liste de tous les points individuels, chacun dans un pseudo-cluster ;
+	- une valeur entière, de [1,9] (ne pas utiliser 10,11 et 12) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters d'une largeur/hauter telles que définies dans la documentation de Elastic (cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html) ;<br>
+	- une distance reconnue par Elastic telle que "1km","100m" (voir la documentation officielle) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters de cette largeur/hauteur (e.g. 1km x 1km).<br>
+	- toute autre valeur entière ou réelle au-delà de ces bornes sera ignorée.
+</p>
 <pre><code class="swift">propertiesSearch.cdvGeoPrecision = &quot;2&quot;
 
-/* 2 types of possible values (String):
-* - GeoHashgrid code: '1', '2', ..., '12'
+/* 3 types of possible values (String):
+* - zero: '0'
+* - GeoHashgrid code: '1', '2', ..., '9'
 * - Distances: '1m', '10km'
 */
 
@@ -272,9 +279,9 @@ Alternatively, the precision level can be approximated from a distance measure l
 
 <h3 id="plusieurs-options-sont-disponibles-lors-dune-recherche-de-type-carte">Plusieurs options sont disponibles lors d'une recherche de type "Carte":</h3>
 <ul>
-<li>cdvHideClusterRect (Boolean) - Ne retorune pas les champs "minlat", "minlng", "maxlat" et "maxlng"</li>
-<li>cdvHidePropertyIds (Boolean) - Ne retorune pas la liste des id "propertiesIds"</li>
-<li>cdvHideSinglePoint (Boolean) - Ne retorune pas le champ "singlePoint"</li>
+<li>cdvHideClusterRect (Boolean) - Ne calcule pas et ne renvoie pas les champs "minlat", "minlng", "maxlat" et "maxlng" décrivant le rectangle géographique dans lequel tous les points d'un cluster sont contenus.</li>
+<li>cdvHidePropertyIds (Boolean) - Ne renvoie pas la liste des id "propertiesIds"</li>
+<li>cdvHideSinglePoint (Boolean) - Ne calcule pas et ne renvoie pas le champ "singlePoint" précisant si le cluster peut être éclaté en augmentant la valeur de Geo Precision (cluster "éclatable" limité à 5m x 5m, donc cdvGeoPrecision = 9)</li>
 </ul>
 <h1 id="recherche-du-nombre-de-properties">Recherche du nombre de properties</h1>
 <p>Cette recherche permet d'obtenir uniquement le nombre de properties correspondant à une recherche, et non détails sur les properties</p>
@@ -312,8 +319,14 @@ propertiesSearch.cdvSort = .none
  * .pricePerMeterDesc
  * .surfaceAsc
  * .surfaceDesc
+ * .distanceAsc
+ * .distanceDesc
  */
 
+<strong>Note importante</strong> : le tri par distance croissante/décroissante (.distanceAsc, .distanceDesc) requiert le paramétrage 
+de cdvGeoDistances avec un seul cdvGeoDistance pour définir le point de départ du tri et sa distance. Cela permet par exemple de "lister 
+les properties jusqu'à 500m de ma position", en paramétrant la position GPS de l'utilisateur comme le centre de cdvGeoDistance et une 
+distance de 0.5 km, et en paramétrant cdvSort = .distanceAsc 
 </code></pre>
 
 <h1 id="parent-types-type-des-proprietes">Parent types (Type des propriétés)</h1>
@@ -342,8 +355,8 @@ propertiesSearch.cdvSort = .none
 </code></pre>
 
 <h1 id="cdvpropertycdvotherdatas-donnees-complementaires">CDVProperty.cdvOtherDatas (données complementaires)</h1>
-<p>Chaque propriété comprend une propriété '.cdvOtherDatas' qui regroupe tout les informations de l'api non accessible directement via les autres propriété de l'objet CDVProperty.</p>
-<p>Ci-desssous le model de donnée tel que retourné par l'api .getPropertiesWithIds:</p>
+<p>Chaque propriété comprend une propriété '.cdvOtherDatas' qui regroupe toutes les informations de l'api non accessibles directement via les autres propriété de l'objet CDVProperty.</p>
+<p>Ci-desssous le modèle de données complet tel que retourné par l'api .getPropertiesWithIds :</p>
 <pre><code class="swift">
 propertyDetail {
     id (integer): CDV’s DB reference ,
@@ -366,8 +379,8 @@ propertyDetail {
     payer_fees (string, optional): Label of the payer(s) (in French) ,
     buyer_fees (boolean, optional): Must the buyer pay the fees? ,
     seller_fees (boolean, optional): Must the seller pay the fees? ,
-    percentage_buyer_fees (number, optional): Percentage fees payed by the buyer ,
-    percentage_seller_fees (number, optional): Percentage fees payed by the seller ,
+    percentage_buyer_fees (number, optional): Percentage fees payed by the buyer ("5.2" is 5.2%) ,
+    percentage_seller_fees (number, optional): Percentage fees payed by the seller  ("5.2" is 5.2%) ,
     rent (number, optional): Rent price ,
     additionnal_rent (number, optional): Additionnal cost to the rent price ,
     monthly_rent_inc_charge (number, optional): Rent price including monthly charge(s) ,
@@ -519,7 +532,7 @@ contact {
 
 </code></pre>
 
-<p>Ci-desssous le model de donnée tel que retourné par l'api .getPropertiesWith(propertiesSearch):</p>
+<p>Ci-desssous le modèle de données résumé (uniquement les données légales obligatoires) tel que retourné par l'api .getPropertiesWith(propertiesSearch) :</p>
 <pre><code class="swift">
 property {
     id (integer): CDV’s DB reference ,
@@ -542,8 +555,8 @@ property {
     payerFees (string, optional): Label of the payer(s) (in French) ,
     buyerFees (boolean, optional): Must the buyer pay the fees? ,
     sellerFees (boolean, optional): Must the seller pay the fees? ,
-    percentageBuyerFees (number, optional): Percentage fees payed by the buyer ,
-    percentageSellerFees (number, optional): Percentage fees payed by the seller ,
+    percentageBuyerFees (number, optional): Percentage fees payed by the buyer ("5.2" is 5.2%) ,
+    percentageSellerFees (number, optional): Percentage fees payed by the seller ("5.2" is 5.2%) ,
     rent (number, optional): Rent price ,
     additionnalRent (number, optional): Additionnal cost to the rent price ,
     monthlyRentIncCharge (number, optional): Rent price including monthly charge(s) ,
