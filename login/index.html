@@ -202,6 +202,7 @@
 <h1 id="login">Login</h1>
 <p>Le SDK permet à l'utilisateur de se logger avec son adresse email, et son mot de passe.
 Une fois le login passée avec succès, le token utilisateur est envoyé automatiquement par le SDK à chaque appel, sans action du développeur.</p>
+<p>Le SDK récupère aussi le tokenK, pour usage de l'api K. Il peut être renouvellé via <em>CDVManager.sharedInstance().me</em></p>
 <pre><code class="swift">
  CDVManager.sharedInstance().login(withEmail: &quot;user@mondomain.com&quot;, password: &quot;monpassword&quot;) { (error, user) in
             if (error != nil) {
@@ -214,6 +215,7 @@ Une fois le login passée avec succès, le token utilisateur est envoyé automat
 </code></pre>
 
 <h1 id="recuperer-les-details-sur-lutilisateur-logge">Récupérer les détails sur l'utilisateur loggé</h1>
+<p>Le SDK récupère aussi un nouveau tokenK, pour usage de l'api K</p>
 <pre><code class="swift">
 CDVManager.sharedInstance().me { (error, user) in
     if (error != nil) {
