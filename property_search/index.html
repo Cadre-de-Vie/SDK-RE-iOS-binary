@@ -164,12 +164,16 @@
               
                 <p>L'API permet de rechercher les properties correspondant à des critères géographiques, ou des critères de la property (surface, nombre de pièces...)</p>
 <h1 id="criteres-de-recherche">Critères de recherche</h1>
-<p>Pour effectuer une recheche, il faut créer un objet de type CDVPropertySearch et lui définir les attributs à rechercher. Les détails des properties sont décrites dans CDVPropertySearch.h
-Il est possible de préciser une recheche avec des critères géographiques en utilisant :
-<em> des cercles (cdvGeoDistance) : une distance en kilomètres autour d'un point central en coordonnées GPS (lat,lng). Voir ci-dessous l'autre usage de cdvGeoDistances en tant que filtre des résultats et non plus critère de recherche ;
-</em> des polygones (cdvGeoPolygons) : au moins 3 points en coordonnées GPS (lat,lng).
-Il est possible de limiter les résultats retournés à ceux visibles dans le viewport d'une carte :
-* viewport (cdvGeoBoundingBox) : obligatoirement caractérisé par ses coordonnées GPS, d'abord Nord-Est (lat,lng) puis Sud-Ouest (lat,lng).</p>
+<p>Pour effectuer une recheche, il faut créer un objet de type CDVPropertySearch et lui définir les attributs à rechercher. Les détails des properties sont décrites dans CDVPropertySearch.h</p>
+<p>Il est possible de préciser une recheche avec des critères géographiques en utilisant :</p>
+<ul>
+<li>des cercles (cdvGeoDistance) : une distance en kilomètres autour d'un point central en coordonnées GPS (lat,lng). Voir ci-dessous l'autre usage de cdvGeoDistances en tant que filtre des résultats et non plus critère de recherche ;</li>
+<li>des polygones (cdvGeoPolygons) : au moins 3 points en coordonnées GPS (lat,lng).</li>
+</ul>
+<p>Il est possible de limiter les résultats retournés à ceux visibles dans le viewport d'une carte :</p>
+<ul>
+<li>viewport (cdvGeoBoundingBox) : obligatoirement caractérisé par ses coordonnées GPS, d'abord Nord-Est (lat,lng) puis Sud-Ouest (lat,lng).</li>
+</ul>
 <p>Il est possible de limiter une recheche sur des critères géographiques en utilisant des polygones, une distance (en kilomètres) autour d'un point, ou une bounding box</p>
 <pre><code class="swift"> let propertiesSearch = CDVPropertySearch.init()
 
@@ -266,11 +270,13 @@ if (error != nil) {
 Values outside of [1,12] will be rejected.
 Alternatively, the precision level can be approximated from a distance measure like "1km", "10m"
 (cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)</p>
-<p>La précsion du regroupement par cluster, maillage ou fonction <em>GeoHashgrid</em>, définie de 3 façons :
-<em> la valeur zéro "0" : indique que le calcul des clusters doit être désactivé pour renvoyer la liste de tous les points individuels, chacun dans un pseudo-cluster
-</em> une valeur entière, de [1,9] (ne pas utiliser 10,11 et 12) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters d'une largeur/hauter telles que définies dans la documentation de Elastic (cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)
-<em> une distance reconnue par Elastic telle que "1km","100m" (voir la documentation officielle) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters de cette largeur/hauteur (e.g. 1km x 1km)
-</em> toute autre valeur entière ou réelle au-delà de ces bornes sera ignorée</p>
+<p>La précsion du regroupement par cluster, maillage ou fonction <em>GeoHashgrid</em>, définie de 3 façons :</p>
+<ul>
+<li>la valeur zéro "0" : indique que le calcul des clusters doit être désactivé pour renvoyer la liste de tous les points individuels, chacun dans un pseudo-cluster</li>
+<li>une valeur entière, de [1,9] (ne pas utiliser 10,11 et 12) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters d'une largeur/hauter telles que définies dans la documentation de Elastic (cf. https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html)</li>
+<li>une distance reconnue par Elastic telle que "1km","100m" (voir la documentation officielle) : indique que le calcul des clusters est activé pour regrouper les points dans des clusters de cette largeur/hauteur (e.g. 1km x 1km)</li>
+<li>toute autre valeur entière ou réelle au-delà de ces bornes sera ignorée</li>
+</ul>
 <pre><code class="swift">propertiesSearch.cdvGeoPrecision = &quot;2&quot;
 
 /* 3 types of possible values (String):
